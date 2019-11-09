@@ -87,6 +87,19 @@ class ViewController: UIViewController {
     super.viewDidAppear(animated)
 
     // TODO 2
+    headerLabelCenterConstraint.constant = 0
+    // TODO 3
+    usernameTextFieldCenterConstraint.constant = 0
+        
+    UIView.animate(withDuration: 0.5,
+                   delay: 0.3,
+                   options: [],
+                   animations: { [weak self] in
+                    self?.view.layoutIfNeeded()
+      }, completion: nil)
+
+
+
   }
 
   override func viewDidLoad() {
@@ -98,13 +111,17 @@ class ViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    // TODO 1
+    // TODO 1 -- Move form objects outside of the view(right side of the device)
+    headerLabelCenterConstraint.constant -= view.bounds.width
+    usernameTextFieldCenterConstraint.constant -= view.bounds.width
+    passwordTextFieldCenterConstraint.constant -= view.bounds.width
   }
 }
 
 // MARK: - Text Field Delegate
 extension ViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    // === compares references. Nice way to check identity of sender object
     let nextField = textField === usernameTextField ? passwordTextField : usernameTextField
     nextField?.becomeFirstResponder()
 
