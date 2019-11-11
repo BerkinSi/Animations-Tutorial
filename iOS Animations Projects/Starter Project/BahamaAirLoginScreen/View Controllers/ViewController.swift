@@ -146,6 +146,14 @@ class ViewController: UIViewController {
                     self?.view.layoutIfNeeded()
       }, completion: nil)
     animateClouds()
+    
+    UIView.animate(withDuration: 1,
+                 delay: 1.2,
+                 options: .curveEaseInOut,
+                 animations: { [weak self] in
+                  self?.loginButton.backgroundColor = .systemYellow
+    }, completion: nil)
+
   }
 
   override func viewDidLoad() {
